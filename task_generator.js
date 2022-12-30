@@ -1,6 +1,5 @@
 const second_sentences_map = new Map(Object.entries(second_sentences));
 const third_sentences_map = new Map(Object.entries(third_sentences));
-const verbs_list  = new Array(Object.entries(all_verbs_list));
 
 function getRandomIndex(len) {
     return Math.floor(Math.random() * len);
@@ -8,7 +7,7 @@ function getRandomIndex(len) {
 
 function getNextVerb() {
     for (let [verb, first, form, _] of all_verbs_list) {
-        if(!document.cookie.includes(verb))
+        if(!document.cookie.includes(verb + "=" + form))
         {
             return [verb, first, form];
         }
@@ -17,20 +16,21 @@ function getNextVerb() {
     return ["", "", ""];
 }
 
-function scheduleNextVerefication(verb, correctAnswers) {
+function scheduleNextVerefication(verb, form, correctAnswers) {
     var date = new Date();
     var time = date.getTime();
     var expireTime = time + 1000 * 60 * Math.pow(5, correctAnswers);
     date.setTime(expireTime);
-    document.cookie = verb + "=; SameSite=None; Secure; expires=" + date.toGMTString() + ";";
+    document.cookie = verb + "=" + form + "; SameSite=None; Secure; expires=" + date.toGMTString() + ";";
 }
 
-let expectedValue = ""
+let expectedValue = []
 
 function fixActions(){
     document.getElementById('answer').disabled = true;
     document.getElementById("help").disabled = true;
     document.getElementById("next").disabled = false;
+    document.getElementById("next").focus();
 }
 
 function incrementCorrectAnswers(verb) {
@@ -50,23 +50,25 @@ function resetCorrectAnswers(verb) {
 
 function verify() {
     let actualValue = document.getElementById('answer').value
-    if(expectedValue == actualValue.toLowerCase()) {
-        correctAnswers = incrementCorrectAnswers(expectedValue);
-        scheduleNextVerefication(expectedValue, correctAnswers);
+    let [verb, form] = expectedValue
+    if(expectedValue[0] == actualValue.toLowerCase()) {
+        correctAnswers = incrementCorrectAnswers(expectedValue[0]);
+        scheduleNextVerefication(verb, form, correctAnswers);
         fixActions();
     }
 }
 
 function help() {
-    document.getElementById('answer').value = expectedValue;
-    correctAnswers = resetCorrectAnswers(expectedValue);
-    scheduleNextVerefication(expectedValue, correctAnswers);
+    let [verb, form] = expectedValue
+    document.getElementById('answer').value = verb;
+    correctAnswers = resetCorrectAnswers(verb);
+    scheduleNextVerefication(verb, form, correctAnswers);
     fixActions();
 }
 
 function next() {
     let [verb, firstForm, form] = getNextVerb();
-    expectedValue = verb
+    expectedValue = [verb, form]
     if(form == "second") {
         document.getElementById("task").innerHTML = getNextTask(verb, firstForm, second_sentences_map);
     }
@@ -75,6 +77,8 @@ function next() {
     }
     document.getElementById("next").disabled = true; 
     document.getElementById("help").disabled = false;
+    document.getElementById("answer").focus();
+    updateProgress();
     refreshTable();
 }
 
@@ -93,6 +97,17 @@ function getNextTask(verb, firstForm, sentences_map) {
     else {
         return "Congratulation!!! there are no irregular verbs left to learn!";
     }
+}
+
+function updateProgress() {
+    let memorised = (document.cookie.match(/=/g) || []).length
+    let total = all_verbs_list.length
+    let percents = (memorised/total)*100
+    console.log(percents)
+
+    document.getElementById("progress").max = total
+    document.getElementById("progress").value = percents
+    document.getElementById("progress_note").innerHTML = "Learned " + memorised.toString() + " irregular verbs out of " + total.toString()
 }
 
 window.onload = function() { next(); };
