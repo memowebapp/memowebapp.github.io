@@ -1,73 +1,80 @@
 
-
-<center>
-    <table border="1" class="center" width="70%">
-        <tr>
-            <th colspan="2"><p id="header" style="font-family: Monaco; font-size: 2.5em; margin-bottom: 1em; margin-top: 1em;">Memo web app :)</p></th>
-        </tr>
-        <tr align="center">
-            <td width="50%">
-                <button id="application_button" onclick="openTab(event, 'application')" style="border: none; width:100%; height: 100%; font-size: 1.5em;">Application</button>
-            </td>
-            <td>
-                <button id="about_button" onclick="openTab(event, 'about')" style="border: none; width:100%; height: 100%; font-size: 1.5em;">About</button>
-            </td>
-        </tr>
-        <tr align="center">
-            <td colspan="2">
-                <div id="application" class="tabcontent">
-                    <table border="1" class="center" width="100%">
-                        <tr align="center">
-                            <td>
-                                <p id="task" style="font-size: 2em; margin-bottom: 0.5em; margin-top: 0.5em;">some sentence</p>
-                            </td>
-                        </tr>
-                        <tr align="center">
-                            <td>
-                                <button id="help" onclick="help();" style="font-size: 1.5em; width:15%;">help</button>
-                                <button id="next" onclick="next();" style="font-size: 1.5em; width:15%;" disabled>next</button>
-                            </td>
-                        </tr>
-                        <tr align="center">
-                            <td>
-                                <progress id="progress" style="margin-top: 1em; width:50%" value="0.5%">0.5%</progress>
-                                <p id="progress_note" style="margin-top: 0.3em; margin-bottom: 1em;">Learned 0 irregular verbs out of 134 </p>
-                            </td>
-                        </tr>
-                        <tr align="center">
-                            <td><p id="table">some table</p></td>
-                        </tr>
-                    </table>
-                </div>
-                
-                <div id="about" class="tabcontent" hidden>
-                    <h3>About</h3>
-                    <p>Some information about this project</p>
-                </div>
-            </td>
-        </tr>
-    </table>
-</center>
-
 <script>
-    function openTab(event, tabName){
-        if(tabName=='application') {
-            document.getElementById("application").style.display = "block";
-            document.getElementById("application_button").disabled = true;
-            document.getElementById("about").style.display = "none";
-            document.getElementById("about_button").disabled = false;
-        }
-        else {
-            document.getElementById("application").style.display = "none";
-            document.getElementById("application_button").disabled = false;
-            document.getElementById("about").style.display = "block";
-            document.getElementById("about_button").disabled = true;
-        }   
+    function openTab(){
+        [document.getElementById("about_button").style.backgroundColor, document.getElementById("application_button").style.backgroundColor] = 
+            [document.getElementById("application_button").style.backgroundColor, document.getElementById("about_button").style.backgroundColor];
+
+        [document.getElementById("about_button").style.borderTop, document.getElementById("application_button").style.borderTop] = 
+            [document.getElementById("application_button").style.borderTop, document.getElementById("about_button").style.borderTop];
+
+        [document.getElementById("about_button").style.borderBottom, document.getElementById("application_button").style.borderBottom] = 
+            [document.getElementById("application_button").style.borderBottom, document.getElementById("about_button").style.borderBottom];
+
+        [document.getElementById("about_button").style.borderLeft, document.getElementById("application_button").style.borderLeft] = 
+            [document.getElementById("application_button").style.borderLeft, document.getElementById("about_button").style.borderLeft];
+
+        [document.getElementById("about_button").style.borderRight, document.getElementById("application_button").style.borderRight] = 
+            [document.getElementById("application_button").style.borderRight, document.getElementById("about_button").style.borderRight];
+
+        [document.getElementById("application").style.display, document.getElementById("about").style.display] = 
+            [document.getElementById("about").style.display, document.getElementById("application").style.display];
     }
-
-
 </script>
-
 <script src="verbs_list.js"></script> 
 <script src="task_generator.js"></script> 
 <script src="table_generator.js"></script> 
+
+<body style="background-color:#1F2833">
+    <center>
+        <table class="center" width="70%" cellspacing="0" cellpadding="0" style="background-color:#C5C6C7; border:solid white 1px;">
+            <tr style="background-color:#0B0C10;">
+                <th colspan="2"><p id="header" style="font-family: Monaco; font-size: 2.5em; color:#66FCF1; margin-bottom: 1em; margin-top: 1em;">MemoWebApp.github.io</p></th>
+            </tr>
+            <tr align="center">
+                <td width="50%">
+                    <button id="application_button" onclick="openTab()" style="border-top:none; border-right:none; border-bottom: solid white 1px; border-left: none; width:100%; height: 100%; font-size: 1.5em;">Irregular verbs</button>
+                </td>
+                <td>
+                    <button id="about_button" onclick="openTab()" style="border-top:solid white 1px; border-right:solid white 1px; border-bottom: none; border-left: solid white 1px; width:100%; height: 100%; font-size: 1.5em; background-color:#C5C6C7;">About</button>
+                </td>
+            </tr>
+            <tr align="center">
+                <td colspan="2">
+                    <div id="application">
+                        <table border="0" class="center" width="100%">
+                            <tr align="center">
+                                <td>
+                                    <p id="task" style="font-size: 2em; margin-bottom: 0.5em; margin-top: 0.5em;">some sentence</p>
+                                </td>
+                            </tr>
+                            <tr align="center">
+                                <td>
+                                    <button id="help" onclick="help();" style="font-size: 1.5em; width:15%;">help</button>
+                                    <button id="next" onclick="next();" style="font-size: 1.5em; width:15%;" disabled>next</button>
+                                </td>
+                            </tr>
+                            <tr align="center">
+                                <td>
+                                    <progress id="progress" style="margin-top: 1em; width:50%" value="0.5%">0.5%</progress>
+                                    <p id="progress_note" style="margin-top: 0.3em; margin-bottom: 1em;">Learned 0 irregular verbs out of 134 </p>
+                                </td>
+                            </tr>
+                            <tr align="center">
+                                <td><p id="table">some table</p></td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div id="about" align="left" style="font-family: Monaco; font-size: 1em; margin-bottom: 0.5em; margin-top: 0.5em; margin-left: 1em; margin-right: 1em;">
+                        <p> Hello, my name is Andrei, and this is my web app to memorizing English irregular verbs.</p>
+                        <p><b>How to use:</b> in the tab "irregular verbs", you may see a simple past or a past participle sentence where an irregular verb is replaced with base form and input field. So all you need to do is type the correct form of the verb and press "next" or if you don't know the answer press "help", try to memorize the answer, and press next.</p>
+                        <p><b>How does it work:</b> if you didn't know the answer and pressed the button "help", the next sentence with this form of the verb will be shown in a few minutes. Each correct answer will increase the timeout before this form of the verb will appear again.</p>
+                        <p><b>Where these sentences came from:</b> I downloaded around 25000 books with about 15Gb of size from open sources and found the sentences with irregular verbs. </p>
+                        <p><b> What is the order of verbs' appearance:</b> verbs were sorted base on citation for instance the verb 'was' appears in 1072780 sentences when "sent" only 705 sentences. So it makes sense to memorize "was" at first.</p>
+                        <p>If you found a mistake, a problem or if you have an idea how to improve this app, fellfree to contact me via email andee.dev@gmail.com thank you!</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </center>
+</body>
