@@ -35,7 +35,7 @@ function fixActions(){
 function incrementCorrectAnswers(verb, form) {
     let key = verb + "_" + form;
     let correctAnswers = localStorage.getItem(key);
-    if (!correctAnswers) correctAnswers = 1;
+    if (!correctAnswers) correctAnswers = 8;
     correctAnswers += 1;
     localStorage.setItem(verb, correctAnswers);
     return correctAnswers;
