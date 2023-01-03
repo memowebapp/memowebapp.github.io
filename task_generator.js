@@ -7,21 +7,20 @@ function getRandomIndex(len) {
 
 function getNextVerb() {
     for (let [verb, first, form, _] of all_verbs_list) {
-        if(!document.cookie.includes(verb + "=" + form))
+        if(!document.cookie.includes(verb + "_" + form + "="))
         {
             return [verb, first, form];
         }
     }
-    //console.log(document.cookie);
     return ["", "", ""];
 }
 
 function scheduleNextVerefication(verb, form, correctAnswers) {
     var date = new Date();
     var time = date.getTime();
-    var expireTime = time + 1000 * 60 * Math.pow(5, correctAnswers);
+    var expireTime = time + 1000 * 60 * Math.pow(3, correctAnswers);
     date.setTime(expireTime);
-    document.cookie = verb + "=" + form + "; SameSite=None; Secure; expires=" + date.toGMTString() + ";";
+    document.cookie = verb + "_" + form + "=" + "; SameSite=None; Secure; expires=" + date.toGMTString() + ";";
 }
 
 let expectedValue = []
@@ -33,16 +32,18 @@ function fixActions(){
     document.getElementById("next").focus();
 }
 
-function incrementCorrectAnswers(verb) {
-    let correctAnswers = localStorage.getItem(verb);
+function incrementCorrectAnswers(verb, form) {
+    let key = verb + "_" + form;
+    let correctAnswers = localStorage.getItem(key);
     if (!correctAnswers) correctAnswers = 1;
     correctAnswers += 1;
     localStorage.setItem(verb, correctAnswers);
     return correctAnswers;
 }
 
-function resetCorrectAnswers(verb) {
-    let correctAnswers = localStorage.getItem(verb);
+function resetCorrectAnswers(verb, form) {
+    let key = verb + "_" + form;
+    let correctAnswers = localStorage.getItem(key);
     if (!correctAnswers) correctAnswers = 1;
     localStorage.setItem(verb, correctAnswers);
     return correctAnswers;
@@ -51,8 +52,8 @@ function resetCorrectAnswers(verb) {
 function verify() {
     let actualValue = document.getElementById('answer').value
     let [verb, form] = expectedValue
-    if(expectedValue[0] == actualValue.toLowerCase()) {
-        correctAnswers = incrementCorrectAnswers(expectedValue[0]);
+    if(verb == actualValue.toLowerCase()) {
+        correctAnswers = incrementCorrectAnswers(verb, form);
         scheduleNextVerefication(verb, form, correctAnswers);
         fixActions();
     }
@@ -61,7 +62,7 @@ function verify() {
 function help() {
     let [verb, form] = expectedValue
     document.getElementById('answer').value = verb;
-    correctAnswers = resetCorrectAnswers(verb);
+    correctAnswers = resetCorrectAnswers(verb, form);
     scheduleNextVerefication(verb, form, correctAnswers);
     fixActions();
 }
@@ -87,7 +88,8 @@ function getNextTask(verb, firstForm, sentences_map) {
         sentences = sentences_map.get(verb);
         const index = getRandomIndex(sentences.length);
         let sentence = sentences[index];
-        let task = ' <input type="text" id="answer" onkeyup="verify();"> (' + firstForm + ') ';
+        let inputLen = verb.length + 2
+        let task = ' <input type="text" id="answer" onkeyup="verify();" style="font-size: 0.7em; margin-bottom: 0.5em; margin-top: 0.5em; width:' + inputLen + 'em;"> (' + firstForm + ') ';
 
         var regEx = new RegExp(verb, "ig");
         sentence = sentence.replace(regEx, task);
@@ -110,6 +112,28 @@ function updateProgress() {
     document.getElementById("progress_note").innerHTML = "Learned " + memorised.toString() + " irregular verbs out of " + total.toString()
 }
 
-window.onload = function() { next(); };
+window.onload = function() { 
+    if((document.cookie.match(/=/g) || []).length > 0) {
+        document.getElementById("application").style.display = "block";
+        document.getElementById("about").style.display = "none";
+
+        [document.getElementById("about_button").style.backgroundColor, document.getElementById("application_button").style.backgroundColor] = 
+            [document.getElementById("application_button").style.backgroundColor, document.getElementById("about_button").style.backgroundColor];
+
+        [document.getElementById("about_button").style.borderTop, document.getElementById("application_button").style.borderTop] = 
+            [document.getElementById("application_button").style.borderTop, document.getElementById("about_button").style.borderTop];
+
+        [document.getElementById("about_button").style.borderBottom, document.getElementById("application_button").style.borderBottom] = 
+            [document.getElementById("application_button").style.borderBottom, document.getElementById("about_button").style.borderBottom];
+
+        [document.getElementById("about_button").style.borderLeft, document.getElementById("application_button").style.borderLeft] = 
+            [document.getElementById("application_button").style.borderLeft, document.getElementById("about_button").style.borderLeft];
+
+        [document.getElementById("about_button").style.borderRight, document.getElementById("application_button").style.borderRight] = 
+            [document.getElementById("application_button").style.borderRight, document.getElementById("about_button").style.borderRight];
+    }
+
+    next(); 
+};
   
 
