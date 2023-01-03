@@ -101,11 +101,18 @@ function getNextTask(verb, firstForm, sentences_map) {
     }
 }
 
+function getTotalNumberOfVerbs() {
+    let total = 0;
+    for (let [verb, m] of verbs_table_map) {
+        total += m['second'].length + m['third'].length;
+    }
+    return total;
+}
+
 function updateProgress() {
-    let memorised = (document.cookie.match(/=/g) || []).length
-    let total = all_verbs_list.length
-    let percents = (memorised/total)*100
-    console.log(percents)
+    let memorised = (document.cookie.match(/=/g) || []).length;
+    let total = getTotalNumberOfVerbs();
+    let percents = (memorised/total)*100;
 
     document.getElementById("progress").max = total
     document.getElementById("progress").value = percents
@@ -126,11 +133,8 @@ window.onload = function() {
         [document.getElementById("about_button").style.borderBottom, document.getElementById("application_button").style.borderBottom] = 
             [document.getElementById("application_button").style.borderBottom, document.getElementById("about_button").style.borderBottom];
 
-        [document.getElementById("about_button").style.borderLeft, document.getElementById("application_button").style.borderLeft] = 
-            [document.getElementById("application_button").style.borderLeft, document.getElementById("about_button").style.borderLeft];
-
-        [document.getElementById("about_button").style.borderRight, document.getElementById("application_button").style.borderRight] = 
-            [document.getElementById("application_button").style.borderRight, document.getElementById("about_button").style.borderRight];
+        [document.getElementById("about_button").style.borderLeft, document.getElementById("application_button").style.borderRight] = 
+            [document.getElementById("application_button").style.borderRight, document.getElementById("about_button").style.borderLeft];
     }
 
     next(); 

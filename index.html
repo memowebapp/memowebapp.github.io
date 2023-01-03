@@ -1,6 +1,6 @@
 
 <script>
-    function openTab(){
+    function openTab(tab_to_show, tab_to_hide) {
         [document.getElementById("about_button").style.backgroundColor, document.getElementById("application_button").style.backgroundColor] = 
             [document.getElementById("application_button").style.backgroundColor, document.getElementById("about_button").style.backgroundColor];
 
@@ -10,19 +10,24 @@
         [document.getElementById("about_button").style.borderBottom, document.getElementById("application_button").style.borderBottom] = 
             [document.getElementById("application_button").style.borderBottom, document.getElementById("about_button").style.borderBottom];
 
-        [document.getElementById("about_button").style.borderLeft, document.getElementById("application_button").style.borderLeft] = 
-            [document.getElementById("application_button").style.borderLeft, document.getElementById("about_button").style.borderLeft];
+        [document.getElementById("about_button").style.borderLeft, document.getElementById("application_button").style.borderRight] = 
+            [document.getElementById("application_button").style.borderRight, document.getElementById("about_button").style.borderLeft];
 
-        [document.getElementById("about_button").style.borderRight, document.getElementById("application_button").style.borderRight] = 
-            [document.getElementById("application_button").style.borderRight, document.getElementById("about_button").style.borderRight];
-
-        [document.getElementById("application").style.display, document.getElementById("about").style.display] = 
-            [document.getElementById("about").style.display, document.getElementById("application").style.display];
+        document.getElementById(tab_to_show).style.display = "block";
+        document.getElementById(tab_to_hide).style.display = "none";
     }
 </script>
 <script src="verbs_list.js"></script> 
 <script src="task_generator.js"></script> 
 <script src="table_generator.js"></script> 
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Learn English irregular verbs</title>
+  <meta name="description" content="Tool to train and memorize English irregular verbs">
+  <meta name="keywords" content="English, irregular verbs, language, learning languages, memories, grammar, exercise">
+</head>
 
 <body style="background-color:#1F2833">
     <center>
@@ -32,15 +37,15 @@
             </tr>
             <tr align="center">
                 <td width="50%">
-                    <button id="application_button" onclick="openTab()" style="border-top:none; border-right:none; border-bottom: solid white 1px; border-left: none; width:100%; height: 100%; font-size: 1.5em;">Irregular verbs</button>
+                    <button id="application_button" onclick="openTab('application', 'about')" style="border-top:none; border-right: none; border-bottom: solid white 1px; border-left: none; width:100%; height: 100%; font-size: 1.5em;">Irregular verbs</button>
                 </td>
                 <td>
-                    <button id="about_button" onclick="openTab()" style="border-top:solid white 1px; border-right:solid white 1px; border-bottom: none; border-left: solid white 1px; width:100%; height: 100%; font-size: 1.5em; background-color:#C5C6C7;">About</button>
+                    <button id="about_button" onclick="openTab('about', 'application')" style="border-top:solid white 1px; border-right:none; border-bottom: none; border-left: solid white 1px; width:100%; height: 100%; font-size: 1.5em; background-color:#C5C6C7;">About</button>
                 </td>
             </tr>
             <tr align="center">
                 <td colspan="2">
-                    <div id="application">
+                    <div id="application" hidden>
                         <table border="0" class="center" width="100%">
                             <tr align="center">
                                 <td>
@@ -78,3 +83,4 @@
         </table>
     </center>
 </body>
+</html>
