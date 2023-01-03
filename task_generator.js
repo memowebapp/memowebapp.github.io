@@ -49,10 +49,14 @@ function resetCorrectAnswers(verb, form) {
     return correctAnswers;
 }
 
+function isAnswerCorrect(expected, actual){
+    return (expected == actual) || (actual in synonyms && synonyms[actual] == expected);
+}
+
 function verify() {
     let actualValue = document.getElementById('answer').value
     let [verb, form] = expectedValue
-    if(verb == actualValue.toLowerCase()) {
+    if(isAnswerCorrect(verb, actualValue.toLowerCase())){
         correctAnswers = incrementCorrectAnswers(verb, form);
         scheduleNextVerefication(verb, form, correctAnswers);
         fixActions();
@@ -101,17 +105,9 @@ function getNextTask(verb, firstForm, sentences_map) {
     }
 }
 
-function getTotalNumberOfVerbs() {
-    let total = 0;
-    for (let [verb, m] of verbs_table_map) {
-        total += m['second'].length + m['third'].length;
-    }
-    return total;
-}
-
 function updateProgress() {
     let memorised = (document.cookie.match(/=/g) || []).length;
-    let total = getTotalNumberOfVerbs();
+    let total = all_verbs_list.length;
     let percents = (memorised/total)*100;
 
     document.getElementById("progress").max = total
