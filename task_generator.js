@@ -104,36 +104,5 @@ function getNextTask(verb, firstForm, sentences_map) {
         return "Congratulation!!! there are no irregular verbs left to learn!";
     }
 }
-
-function updateProgress() {
-    let memorised = (document.cookie.match(/=/g) || []).length;
-    let total = all_verbs_list.length;
-    let percents = (memorised/total)*100;
-
-    document.getElementById("progress").max = total
-    document.getElementById("progress").value = percents
-    document.getElementById("progress_note").innerHTML = "Learned " + memorised.toString() + " irregular verbs out of " + total.toString()
-}
-
-window.onload = function() { 
-    if((document.cookie.match(/=/g) || []).length > 0) {
-        document.getElementById("application").style.display = "block";
-        document.getElementById("about").style.display = "none";
-
-        [document.getElementById("about_button").style.backgroundColor, document.getElementById("application_button").style.backgroundColor] = 
-            [document.getElementById("application_button").style.backgroundColor, document.getElementById("about_button").style.backgroundColor];
-
-        [document.getElementById("about_button").style.borderTop, document.getElementById("application_button").style.borderTop] = 
-            [document.getElementById("application_button").style.borderTop, document.getElementById("about_button").style.borderTop];
-
-        [document.getElementById("about_button").style.borderBottom, document.getElementById("application_button").style.borderBottom] = 
-            [document.getElementById("application_button").style.borderBottom, document.getElementById("about_button").style.borderBottom];
-
-        [document.getElementById("about_button").style.borderLeft, document.getElementById("application_button").style.borderRight] = 
-            [document.getElementById("application_button").style.borderRight, document.getElementById("about_button").style.borderLeft];
-    }
-
-    next(); 
-};
   
 

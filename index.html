@@ -1,30 +1,11 @@
-<!-- TODO 
-    move js functions to separate file 
+<!-- TODO
     move css to separate file
     adjust for mobile (main table width, avoid setting focus)
 -->
 
-<script>
-    function openTab(tab_to_show, tab_to_hide) {
-        [document.getElementById("about_button").style.backgroundColor, document.getElementById("application_button").style.backgroundColor] = 
-            [document.getElementById("application_button").style.backgroundColor, document.getElementById("about_button").style.backgroundColor];
-
-        [document.getElementById("about_button").style.borderTop, document.getElementById("application_button").style.borderTop] = 
-            [document.getElementById("application_button").style.borderTop, document.getElementById("about_button").style.borderTop];
-
-        [document.getElementById("about_button").style.borderBottom, document.getElementById("application_button").style.borderBottom] = 
-            [document.getElementById("application_button").style.borderBottom, document.getElementById("about_button").style.borderBottom];
-
-        [document.getElementById("about_button").style.borderLeft, document.getElementById("application_button").style.borderRight] = 
-            [document.getElementById("application_button").style.borderRight, document.getElementById("about_button").style.borderLeft];
-
-        document.getElementById(tab_to_show).style.display = "block";
-        document.getElementById(tab_to_hide).style.display = "none";
-    }
-</script>
 <script src="verbs_list.js"></script> 
 <script src="task_generator.js"></script> 
-<script src="table_generator.js"></script> 
+<script src="visualization.js"></script> 
 
 <!DOCTYPE html>
 <html>
