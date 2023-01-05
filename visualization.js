@@ -1,20 +1,30 @@
 const verbs_table_map = new Map(Object.entries(verbs_table));
 
-function isMemoized(arr, form) {
-    for (let verb of arr) {
-        if(!document.cookie.includes(verb + "_" + form + "=")) {
-            return false;
-        }
-    }
-    return true;
-}
-
 function openedClass() {
     return isMobileDevice() ? "opened-tab-mobile" : "opened-tab";
 }
 
 function closedClass() {
     return isMobileDevice() ? "closed-tab-mobile" : "closed-tab";
+}
+
+function getVerbString(verb, form){
+    let isMemorized = document.cookie.includes(verb + "_" + form + "=");
+    let str = isMemorized ? verb : '-';
+    if(isMemorized && verb in synonyms) {
+        str += " (" + synonyms[verb] + ")";
+    }
+    return str;
+}
+
+function getVerbsStr(verbs, form) {
+    let str = "";
+    let separator = "";
+    for (let verb of verbs) {
+        str += separator + getVerbString(verb, form);
+        separator = ", ";
+    }
+    return str;
 }
 
 function refreshTable() {
@@ -24,8 +34,8 @@ function refreshTable() {
     let count = 0;
     for (let [verb, m] of verbs_table_map) {
         count += 1;
-        let second = isMemoized(m['second'], 'second') ? '&#10004;' : '-';
-        let third = isMemoized(m['third'], 'third') ? '&#10004;' : '-';
+        let second = getVerbsStr(m['second'], 'second');
+        let third = getVerbsStr(m['third'], 'third');
         color == 'white' ?  color = '#C5C6C7' : color = 'white'
         table += '<tr align="center" bgcolor="' + color + '"> <td width="10%">' + count + '</td> <td width="40%">' + verb + '</td> <td width="25%">' + second + '</td> <td width="25%">' + third + '</td></tr>';
     }
