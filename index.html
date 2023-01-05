@@ -1,11 +1,8 @@
 <!-- TODO
-    move css to separate file
     adjust for mobile (main table width, avoid setting focus)
+    make a text in about tab more readable
+    consider to use in table instead of checkmarks verbs 
 -->
-
-<script src="verbs_list.js"></script> 
-<script src="task_generator.js"></script> 
-<script src="visualization.js"></script> 
 
 <!DOCTYPE html>
 <html>
@@ -13,41 +10,42 @@
   <title>Learn English irregular verbs</title>
   <meta name="description" content="Tool to train and memorize English irregular verbs">
   <meta name="keywords" content="English, irregular verbs, language, learning languages, memories, grammar, exercise, test, online">
+  <link rel="stylesheet" href="memo.css">
 </head>
 
-<body style="background-color:#1F2833">
+<body class="body">
     <center>
-        <table class="center" width="70%" cellspacing="0" cellpadding="0" style="background-color:#C5C6C7; border:solid white 1px;">
-            <tr style="background-color:#0B0C10;">
-                <th colspan="2"><p id="header" style="font-family: Monaco; font-size: 2.5em; color:#66FCF1; margin-bottom: 1em; margin-top: 1em;">MemoWebApp.github.io</p></th>
+        <table class="main-table" cellpadding="0">
+            <tr class="header-tr">
+                <th colspan="2"><p class="header-p">MemoWebApp.github.io</p></th>
             </tr>
-            <tr align="center">
-                <td width="50%">
-                    <button id="application_button" onclick="openTab('application', 'about')" style="border-top:none; border-right: none; border-bottom: solid white 1px; border-left: none; width:100%; height: 100%; font-size: 1.5em;">Irregular verbs</button>
+            <tr>
+                <td class="tab-td">
+                    <button id="application_button" onclick="openTab('application', 'about')" class="clesed-tab">Irregular verbs</button>
                 </td>
                 <td>
-                    <button id="about_button" onclick="openTab('about', 'application')" style="border-top:solid white 1px; border-right:none; border-bottom: none; border-left: solid white 1px; width:100%; height: 100%; font-size: 1.5em; background-color:#C5C6C7;">About</button>
+                    <button id="about_button" onclick="openTab('about', 'application')" class="opened-tab">About</button>
                 </td>
             </tr>
-            <tr align="center">
+            <tr>
                 <td colspan="2">
                     <div id="application" hidden>
-                        <table border="0" class="center" width="100%">
+                        <table width="100%" >
                             <tr align="center">
                                 <td>
-                                    <p id="task" style="font-size: 2em; margin-bottom: 0.5em; margin-top: 0.5em;">some sentence</p>
+                                    <p id="task" class="task-p">a task</p>
                                 </td>
                             </tr>
                             <tr align="center">
                                 <td>
-                                    <button id="help" onclick="help();" style="font-size: 1.5em; width:15%;">help</button>
-                                    <button id="next" onclick="next();" style="font-size: 1.5em; width:15%;" disabled>next</button>
+                                    <button id="help" onclick="help();" class="action-button">help</button>
+                                    <button id="next" onclick="next();" class="action-button" disabled>next</button>
                                 </td>
                             </tr>
                             <tr align="center">
                                 <td>
-                                    <progress id="progress" style="margin-top: 1em; width:50%" value="0.5%">0.5%</progress>
-                                    <p id="progress_note" style="margin-top: 0.3em; margin-bottom: 1em;">Learned 0 irregular verbs out of 134 </p>
+                                    <progress id="progress" class="progress-bar" value="0.5%">0.5%</progress>
+                                    <p id="progress_note" class="progress-note">Learned 0 irregular verbs out of 134 </p>
                                 </td>
                             </tr>
                             <tr align="center">
@@ -56,7 +54,7 @@
                         </table>
                     </div>
                     
-                    <div id="about" align="left" style="font-family: Monaco; font-size: 1em; margin-bottom: 0.5em; margin-top: 0.5em; margin-left: 1em; margin-right: 1em;">
+                    <div id="about" align="left" class="about-div">
                         <p> Hi, my name is Andrei, and this is my non-commercial project with the main goal to provide an efficient tool for memorizing English irregular verbs.</p>
                         <p><b>How to use:</b> in the tab <i>"Irregular verbs"</i>, you may see a simple past or a past participle sentence where an irregular verb is replaced with base form and input field. So all you need to do is type the correct form of the verb and press "next" or if you don't know the answer press "help", try to memorize the answer, and press next.</p>
                         <p><b>How does it work:</b> if you didn't know the answer and pressed the button "help", the next sentence with this form of the verb will be shown in a few minutes. Each correct answer will increase the timeout of the next appearance.</p>
@@ -70,3 +68,7 @@
     </center>
 </body>
 </html>
+
+<script src="verbs_list.js"></script> 
+<script src="task_generator.js"></script> 
+<script src="visualization.js"></script> 

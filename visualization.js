@@ -26,20 +26,10 @@ function refreshTable() {
     document.getElementById("table").innerHTML = table;
 }
 
-function openTab(tab_to_show, tab_to_hide) {
-    [document.getElementById("about_button").style.backgroundColor, document.getElementById("application_button").style.backgroundColor] = 
-        [document.getElementById("application_button").style.backgroundColor, document.getElementById("about_button").style.backgroundColor];
-
-    [document.getElementById("about_button").style.borderTop, document.getElementById("application_button").style.borderTop] = 
-        [document.getElementById("application_button").style.borderTop, document.getElementById("about_button").style.borderTop];
-
-    [document.getElementById("about_button").style.borderBottom, document.getElementById("application_button").style.borderBottom] = 
-        [document.getElementById("application_button").style.borderBottom, document.getElementById("about_button").style.borderBottom];
-
-    [document.getElementById("about_button").style.borderLeft, document.getElementById("application_button").style.borderRight] = 
-        [document.getElementById("application_button").style.borderRight, document.getElementById("about_button").style.borderLeft];
-
+function openTab(tab_to_show, tab_to_hide) {       
+    document.getElementById(tab_to_show+"_button").setAttribute("class", "opened-tab");
     document.getElementById(tab_to_show).style.display = "block";
+    document.getElementById(tab_to_hide+"_button").setAttribute("class", "clesed-tab");
     document.getElementById(tab_to_hide).style.display = "none";
 }
 
@@ -54,22 +44,13 @@ function updateProgress() {
 }
 
 window.onload = function() { 
+
     if((document.cookie.match(/=/g) || []).length > 0) {
         document.getElementById("application").style.display = "block";
         document.getElementById("about").style.display = "none";
 
-        [document.getElementById("about_button").style.backgroundColor, document.getElementById("application_button").style.backgroundColor] = 
-            [document.getElementById("application_button").style.backgroundColor, document.getElementById("about_button").style.backgroundColor];
-
-        [document.getElementById("about_button").style.borderTop, document.getElementById("application_button").style.borderTop] = 
-            [document.getElementById("application_button").style.borderTop, document.getElementById("about_button").style.borderTop];
-
-        [document.getElementById("about_button").style.borderBottom, document.getElementById("application_button").style.borderBottom] = 
-            [document.getElementById("application_button").style.borderBottom, document.getElementById("about_button").style.borderBottom];
-
-        [document.getElementById("about_button").style.borderLeft, document.getElementById("application_button").style.borderRight] = 
-            [document.getElementById("application_button").style.borderRight, document.getElementById("about_button").style.borderLeft];
+        document.getElementById("about_button").setAttribute("class", "clesed-tab");
+        document.getElementById("application_button").setAttribute("class", "opened-tab");
     }
-
     next(); 
 };
