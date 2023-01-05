@@ -25,11 +25,15 @@ function scheduleNextVerefication(verb, form, correctAnswers) {
 
 let expectedValue = []
 
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 function fixActions(){
     document.getElementById('answer').disabled = true;
     document.getElementById("help").disabled = true;
     document.getElementById("next").disabled = false;
-    document.getElementById("next").focus();
+    if(!isMobileDevice()) document.getElementById("next").focus();
 }
 
 function incrementCorrectAnswers(verb, form) {
@@ -82,7 +86,7 @@ function next() {
     }
     document.getElementById("next").disabled = true; 
     document.getElementById("help").disabled = false;
-    document.getElementById("answer").focus();
+    if(!isMobileDevice()) document.getElementById("answer").focus();
     updateProgress();
     refreshTable();
 }
@@ -91,11 +95,11 @@ function getNextTask(verb, firstForm, sentences_map) {
     if(verb) {
         sentences = sentences_map.get(verb);
         const index = getRandomIndex(sentences.length);
-        let sentence = sentences[index];
-        let inputLen = verb.length + 2
-        let task = ' <input type="text" id="answer" onkeyup="verify();" style="font-size: 0.7em; margin-bottom: 0.5em; margin-top: 0.5em; width:' + inputLen + 'em;"> (' + firstForm + ') ';
+        let sentence = " " + sentences[index] + " ";
+        let inputLen = verb.length + 2;
+        let task = ' <input type="text" id="answer" onkeyup="verify();" class="answer-input" size="'+inputLen+'"> (' + firstForm + ') ';
 
-        var regEx = new RegExp(verb, "ig");
+        var regEx = new RegExp(" " + verb + " ", "ig");
         sentence = sentence.replace(regEx, task);
 
         return sentence;

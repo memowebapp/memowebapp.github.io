@@ -9,8 +9,16 @@ function isMemoized(arr, form) {
     return true;
 }
 
+function openedClass() {
+    return isMobileDevice() ? "opened-tab-mobile" : "opened-tab";
+}
+
+function closedClass() {
+    return isMobileDevice() ? "closed-tab-mobile" : "closed-tab";
+}
+
 function refreshTable() {
-    let table = '<table  class="center" width="70%">';
+    let table = isMobileDevice() ? '<table width="96%" style="border: solid white 1px; border-spacing: 0; padding: 0;">' : '<table width="70%">';
     table += '<tr align="center" bgcolor="white"><th width="10%"> # </th><th width="40%"> Infinitive </th> <th width="25%"> Past Simple </th> <th width="25%">Past Participle</th></tr>';
     let color = 'white';
     let count = 0;
@@ -23,13 +31,13 @@ function refreshTable() {
     }
     table += '</table>';
 
-    document.getElementById("table").innerHTML = table;
+    document.getElementById("verbs_table").innerHTML = table;
 }
 
 function openTab(tab_to_show, tab_to_hide) {       
-    document.getElementById(tab_to_show+"_button").setAttribute("class", "opened-tab");
+    document.getElementById(tab_to_show+"_button").setAttribute("class", openedClass());
     document.getElementById(tab_to_show).style.display = "block";
-    document.getElementById(tab_to_hide+"_button").setAttribute("class", "clesed-tab");
+    document.getElementById(tab_to_hide+"_button").setAttribute("class", closedClass());
     document.getElementById(tab_to_hide).style.display = "none";
 }
 
@@ -49,8 +57,24 @@ window.onload = function() {
         document.getElementById("application").style.display = "block";
         document.getElementById("about").style.display = "none";
 
-        document.getElementById("about_button").setAttribute("class", "clesed-tab");
-        document.getElementById("application_button").setAttribute("class", "opened-tab");
+        document.getElementById("about_button").setAttribute("class", closedClass());
+        document.getElementById("application_button").setAttribute("class", openedClass());
     }
+    else {
+        document.getElementById("about_button").setAttribute("class", openedClass());
+        document.getElementById("application_button").setAttribute("class", closedClass());
+    }
+
+    if(isMobileDevice()){
+        document.getElementById("main_table").setAttribute("class", "main-table-mobile");
+        document.getElementById("task").setAttribute("class", "task-p-mobile");
+        document.getElementById("help").setAttribute("class", "action-button-mobile");
+        document.getElementById("next").setAttribute("class", "action-button-mobile");
+        document.getElementById("header_p").setAttribute("class", "header-p-mobile");
+        document.getElementById("verbs_table").setAttribute("class", "verbs-table-mobile");
+        document.getElementById("tab_td").setAttribute("class", "tab-td-mobile");
+        document.getElementById("progress_note").setAttribute("class", "progress-note-mobile");
+    }
+
     next(); 
 };

@@ -2,6 +2,10 @@
     background-color: #C5C6C7; border: solid white 1px;  width: 70%; border-spacing: 0; padding: 0;
 }
 
+.main-table-mobile {
+    background-color: #C5C6C7; border: solid white 1px;  width: 100%; border-spacing: 0; padding: 0;
+}
+
 .header-tr {
     background-color: #0B0C10;
 }
@@ -10,11 +14,19 @@
     font-family: Monaco; font-size: 2.5em; color:#66FCF1; margin-bottom: 1em; margin-top: 1em;
 }
 
-.tab-td {
-    width: 50%; border-spacing: 0;
+.header-p-mobile {
+    font-family: Monaco; font-size: 4em; color:#66FCF1; margin-bottom: 2em; margin-top: 2em;
 }
 
-.clesed-tab {
+.tab-td {
+    width: 50%; border-spacing: 0; height: 2em;
+}
+
+.tab-td-mobile {
+    width: 50%; border-spacing: 0; height: 3em;
+}
+
+.closed-tab {
     border-top:none; border-right: none; border-bottom: solid white 1px; border-left: none; width:100%; height: 100%; font-size: 1.5em;
 }
 
@@ -22,20 +34,44 @@
     border-top:solid white 1px; border-right: solid white 1px; border-bottom: none; border-left: solid white 1px; width:100%; height: 100%; font-size: 1.5em; background-color:#C5C6C7;
 }
 
+.closed-tab-mobile {
+    border-top:none; border-right: none; border-bottom: solid white 1px; border-left: none; width:100%; height: 100%; font-size: 3em; margin-bottom: 0.5em; margin-top: 0.5em;
+}
+
+.opened-tab-mobile {
+    border-top:solid white 1px; border-right: solid white 1px; border-bottom: none; border-left: solid white 1px; width:100%; height: 100%; font-size: 3em; background-color:#C5C6C7; margin-bottom: 0.5em; margin-top: 0.5em;
+}
+
 .task-p {
     font-size: 2em; margin-bottom: 0.5em; margin-top: 0.5em;
+}
+
+.task-p-mobile {
+    font-size: 4em; margin-bottom: 0.5em; margin-top: 0.5em;
+}
+
+.answer-input {
+    font-size: 0.7em; margin-bottom: 0.5em; margin-top: 0.5em;
 }
 
 .action-button {
     font-size: 1.5em; width:15%;
 }
 
+.action-button-mobile {
+    font-size: 2em; width:30%; height: 3em; margin-right: 1em;
+}
+
 .progress-bar {
-    margin-top: 1em; width:50%
+    margin-top: 1em; width:50%; margin-top: 1em;
 }
 
 .progress-note {
     margin-top: 0.3em; margin-bottom: 1em;
+}
+
+.progress-note-mobile {
+    margin-top: 0.4em; margin-bottom: 1em; font-size: 2em;
 }
 
 .about-div {
@@ -44,4 +80,12 @@
 
 .body {
     background-color:#1F2833;
+}
+
+.verbs-table {
+    font-size: 1em;
+}
+
+.verbs-table-mobile {
+    font-size: 2em;
 }
