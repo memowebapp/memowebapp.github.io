@@ -15,7 +15,7 @@
 }
 
 .header-p-mobile {
-    font-family: Monaco; font-size: 4em; color:#66FCF1; margin-bottom: 2em; margin-top: 2em;
+    font-family: Monaco; font-size: 4em; color:#66FCF1; margin-bottom: 1em; margin-top: 1em;
 }
 
 .tab-td {
@@ -76,6 +76,10 @@
 
 .about-div {
     font-size: 1.5em; margin-bottom: 0.5em; margin-top: 0.5em; margin-left: 1em; margin-right: 1em; column-count: 2;
+}
+
+.about-div-mobile {
+    font-size: 1.5em; margin-bottom: 0.5em; margin-top: 0.5em; margin-left: 2em; margin-right: 2em; column-count: 1;
 }
 
 .body {

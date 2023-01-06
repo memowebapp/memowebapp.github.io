@@ -88,6 +88,7 @@ window.onload = function() {
         document.getElementById("verbs_table").setAttribute("class", "verbs-table-mobile");
         document.getElementById("tab_td").setAttribute("class", "tab-td-mobile");
         document.getElementById("progress_note").setAttribute("class", "progress-note-mobile");
+        document.getElementById("about").setAttribute("class", "about-div-mobile");
     }
 
     next(); 
