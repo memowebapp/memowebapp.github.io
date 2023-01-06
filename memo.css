@@ -75,7 +75,7 @@
 }
 
 .about-div {
-    font-family: Monaco; font-size: 1em; margin-bottom: 0.5em; margin-top: 0.5em; margin-left: 1em; margin-right: 1em;
+    font-size: 1.5em; margin-bottom: 0.5em; margin-top: 0.5em; margin-left: 1em; margin-right: 1em; column-count: 2;
 }
 
 .body {
