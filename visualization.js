@@ -1,5 +1,9 @@
 const verbs_table_map = new Map(Object.entries(verbs_table));
 
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 function openedClass() {
     return isMobileDevice() ? "opened-tab-mobile" : "opened-tab";
 }

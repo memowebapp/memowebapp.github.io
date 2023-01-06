@@ -25,15 +25,11 @@ function scheduleNextVerefication(verb, form, correctAnswers) {
 
 let expectedValue = []
 
-function isMobileDevice() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
-
 function fixActions(){
     document.getElementById('answer').disabled = true;
     document.getElementById("help").disabled = true;
     document.getElementById("next").disabled = false;
-    if(!isMobileDevice()) document.getElementById("next").focus();
+    document.getElementById("next").focus();
 }
 
 function incrementCorrectAnswers(verb, form) {
@@ -86,7 +82,7 @@ function next() {
     }
     document.getElementById("next").disabled = true; 
     document.getElementById("help").disabled = false;
-    if(!isMobileDevice()) document.getElementById("answer").focus();
+    document.getElementById("answer").focus();
     updateProgress();
     refreshTable();
 }
