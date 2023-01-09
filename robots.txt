@@ -1,0 +1,8 @@
+User-agent: Googlebot
+Disallow: /task_generator.js
+Disallow: /verbs_list.js
+Disallow: /visualization.js
+Disallow: /data_preparation_scripts/
+
+User-agent: *
+Allow: /
