@@ -46,7 +46,7 @@ for verb in third:
 for filename in os.listdir(path):
     try:
         with open(os.path.join(path, filename), 'r') as f:
-            data = f.read().replace('\n', '')
+            data = f.read().replace('\n', ' ')
             sentences = re.findall(r"[A-Z]{1}[A-Za-z,'\s]*[\.!?]{1}", data)
             for sentence in sentences:
                 sentenceLower = sentence.lower()
