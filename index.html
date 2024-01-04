@@ -12,8 +12,8 @@
     </script>
 
     <title>Learn English irregular verbs, Free Online Exercises.</title>
-    <meta name="description" content="MemoWebApp is a free online tool for memorizing English irregular verbs.">
-    <meta name="keywords" content="English, irregular verbs, language, training, learning, memorizing, exercise, testing, online, tool, web app">
+    <meta name="description" content="MemoWebApp is a free online tools for improving your English.">
+    <meta name="keywords" content="English, learning, TV shows, series, irregular verbs, language, training, memorizing, exercise, testing, online, tool, web app">
     <link rel="stylesheet" href="memo.css">
 </head>
 
@@ -21,18 +21,59 @@
     <center>
         <table id="main_table" class="main-table" cellpadding="0">
             <tr class="header-tr">
-                <th colspan="2"><p id="header_p" class="header-p">Memo Web App</p></th>
+                <th colspan="3"><p id="header_p" class="header-p">Memo Web App</p></th>
             </tr>
             <tr>
+                <td>
+                    <button id="about_button" onclick="openTab('about', ['application', 'series'])" class="closed-tab">About</button>
+                </td>
                 <td id="tab_td" class="tab-td">
-                    <button id="application_button" onclick="openTab('application', 'about')" class="closed-tab">Irregular verbs</button>
+                    <button id="application_button" onclick="openTab('application', ['about', 'series'])" class="opened-tab">Irregular verbs</button>
                 </td>
                 <td>
-                    <button id="about_button" onclick="openTab('about', 'application')" class="opened-tab">About</button>
+                    <button id="series_button" onclick="openTab('series', ['about', 'application'])" class="closed-tab">Series</button>
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td colspan="3">
+                    <div id="about" align="left" class="about-div">
+                        <p>&emsp;Hi, my name is Andrei, and this is a volunteer project with the primary goal of providing an efficient tools for improving and maintaining your English level. At the moment you can find two sections.</p>
+                        <details>
+                            <summary>Web application to memorising irregular verbs.</summary>
+                            <div style="margin-left: 1em; margin-right: 1em;">
+                                <p><i>&emsp;Who is this app for?</i> I'm expecting that you are already familiar with basic English grammar and particularly with simple past and present perfect tenses. </p>
+                                <p><i>&emsp;How to use?</i> in the tab "Irregular verbs", you may see a simple past or a past participle sentence where an irregular verb is replaced with a base form and input field. So all you need to do is type the correct form of the verb and press "next" or if you don't know the answer press "help", try to memorize the answer, and press next.</p>
+                                <p><i>&emsp;How does it work?</i> if you didn't know the answer and pressed the button "help", the following sentence with this verb will be shown in a few minutes. Each correct answer will increase the timeout of the next appearance.</p>
+                                <p><i>&emsp;Where these sentences came from?</i> I downloaded around 25000 books with about 15Gb of size from open sources. Then I used a script to find and select sentences with irregular verbs. As sentences were selected automatically it could happen that some of them contain errors or inappropriate words. If you will meet such a sentence, please let me know.</p>
+                                <p><i>&emsp;What is the order of verbs' appearance?</i> verbs were sorted base on citation for instance the verb "was" appears in 1072780 sentences while "sent" only in 14461 sentences. So it makes sense to memorize "was" at first.</p>
+                            </div>
+                        </details>
+                        <br/>
+                        <details>
+                            <summary>List of TV shows sorted by complexity of used words.</summary>
+                            <div style="margin-left: 1em; margin-right: 1em;">
+                                <p><i>&emsp;Why sort TV shows by complexity?</i>
+                                    If you are not a native English speaker and wanna try to watch a TV show in English it could be tricky to find one which is not too difficult to understand. To tackle this problem I tried to estimate the complexity of different series based on the list of words that were used in each show.</p>
+                                <p><i>&emsp;How exactly did I estimate complexity?</i> Firstly to analyze the complexity of the TV shows I downloaded subtitles for TV shows with IMDb ratings of 8.0 or higher and then estimated them in the following fashion: <br/>
+                                    <ul>
+                                        <li>1 I counted all words in all series. So I got a list of words and how often a particular word met. </li>
+                                        <li>2 I assigned "weight" to each word based on frequency of usage. The most popular word "I" got "weight" 1 and the second most popular word "you" got "weight" 392345 as it was met 392345 times less than "I", and so on. </li>
+                                        <li>3 And finally I summed the weights of all words from a particular TV show, and divided them by their number  "(w<sub>1</sub>+w<sub>2</sub>+...+w<sub>n</sub>)/n" so I got the average "weight" per TV show. </li>
+                                    </ul>
+                                    So the average weight that I got for each TV show I consider as a complexity and based on this value I sorted the series in my list.
+                                </p>
+                            </div>
+                        </details>
+                        <br/>
+                        <hr>
+                        <p><i>Feel free to provide feedback or a problem report via email memowebappgithub@gmail.com, thank you!</i></p>
+                        <p> <b>P.S. </b> If by any chance you are a graphic designer and have an irresistible desire to develop a passable design for this web app, let me know.</p>
+                    </div>
+
+                    <div id="series">
+			            <p id="series_table" align="center" class="series-table"> series table</p>
+                    </div>
+
                     <div id="application" hidden>
                         <table width="100%" >
                             <tr align="center">
@@ -53,21 +94,9 @@
                                 </td>
                             </tr>
                             <tr align="center">
-                                <td><p id="verbs_table" calss="verbs-table">some table</p></td>
+                                <td><p id="verbs_table" class="verbs-table">some table</p></td>
                             </tr>
                         </table>
-                    </div>
-                    
-                    <div id="about" align="left" class="about-div">
-                        <p><i>Hi, my name is Andrei, and this is a volunteer project with the primary goal of providing an efficient tool for memorizing English irregular verbs. </i></p>
-                        <p><b>Who is this app for?</b> I'm expecting that you are already familiar with basic English grammar and particularly with simple past and present perfect tenses. </p>
-                        <p><b>How to use?</b> in the tab <i>"Irregular verbs"</i>, you may see a simple past or a past participle sentence where an irregular verb is replaced with a base form and input field. So all you need to do is type the correct form of the verb and press "next" or if you don't know the answer press "help", try to memorize the answer, and press next.</p>
-                        <p><b>How does it work?</b> if you didn't know the answer and pressed the button "help", the following sentence with this verb will be shown in a few minutes. Each correct answer will increase the timeout of the next appearance.</p>
-                        <p><b>Where these sentences came from?</b> I downloaded around 25000 books with about 15Gb of size from open sources. Then I used a script to find and select sentences with irregular verbs. As sentences were selected automatically it could happen that some of them contain errors or inappropriate words. If you will meet such a sentence, please let me know.</p>
-                        <p><b>What is the order of verbs' appearance?</b> verbs were sorted base on citation for instance the verb "was" appears in 1072780 sentences while "sent" only in 14461 sentences. So it makes sense to memorize "was" at first.</p>
-                        <hr>
-                        <p><i>Feel free to provide feedback or a problem report via email memowebappgithub@gmail.com, thank you!</i></p>
-                        <p> <b>P.S. </b> If by any chance you are a graphic designer and have an irresistible desire to develop a passable design for this web app, let me know.</p>
                     </div>
                 </td>
             </tr>
@@ -77,5 +106,6 @@
 </html>
 
 <script src="verbs_list.js"></script> 
+<script src="series_list.js"></script> 
 <script src="task_generator.js"></script> 
 <script src="visualization.js"></script> 

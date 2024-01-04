@@ -1,4 +1,5 @@
 const verbs_table_map = new Map(Object.entries(verbs_table));
+const series_map = new Map(Object.entries(series));
 
 function isMobileDevice() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -48,11 +49,57 @@ function refreshTable() {
     document.getElementById("verbs_table").innerHTML = table;
 }
 
-function openTab(tab_to_show, tab_to_hide) {       
+function movieDiscription(position, complexity, movie_data) {
+    let title = movie_data[0]
+    let year = movie_data[1]
+    let poster = movie_data[2]
+    let rating = movie_data[3]
+    let totalEpisodes = movie_data[4]
+    return '<table width="80%" align="center"> \
+                <tr> \
+                    <td width="5%"> \
+                        <p style="font-size: 1.5em"> ' + position + '. </p> \
+                    </td> \
+                    <td width="15%"> \
+                        <img src="'+poster+'" width="100%"> \
+                    </td> \
+                    <td> \
+                        <table width="100%"> \
+                            <tr> \
+                                <td  valign="top"><p style="font-size: 1.5em;">&emsp;' + title + ' </p></td> \
+                            </tr> \
+                            <tr> \
+                                <td  valign="bottom"><p style="font-size: 1em; color: Silver; padding-left: 1%;">&emsp;' + year + '&emsp;IMDb rating: ' + rating + '&emsp;' + totalEpisodes + ' eps  </p></td> \
+                            </tr> \
+                        </table> \
+                    </td> \
+                </tr> \
+            </table>'
+}
+
+function refreshSeriesTable() {
+    let table = isMobileDevice() ? '<table width="96%" style="border: solid black 1px; border-spacing: 0; padding: 0; background-color: white;">' : '<table width="80%" style="border: solid black 1px; border-spacing: 0; padding: 0; background-color: white;">';
+    table += '<tr><td><p style="font-size: 1.5em; text-align:center">Here you can find the list of TV shows sorted by complexity to understanding</p></td></tr>';
+    table += '<tr><td><hr style="width:80%;text-align:center"> </td></tr>'
+    let position = 0
+    for (let [complexity, movie_data] of series_map) {
+        position += 1
+
+        table += '<tr><td valign="bottom">' + movieDiscription(position, complexity, movie_data) + '</td></tr>';
+        table += '<tr><td><hr style="width:80%;text-align:center"> </td></tr>'
+    }
+    table += '</table>';
+
+    document.getElementById("series_table").innerHTML = table;
+}
+
+function openTab(tab_to_show, tabs_to_hide) {       
     document.getElementById(tab_to_show+"_button").setAttribute("class", openedClass());
     document.getElementById(tab_to_show).style.display = "block";
-    document.getElementById(tab_to_hide+"_button").setAttribute("class", closedClass());
-    document.getElementById(tab_to_hide).style.display = "none";
+    for (let i = 0; i < tabs_to_hide.length; i++) {
+        document.getElementById(tabs_to_hide[i]+"_button").setAttribute("class", closedClass());
+        document.getElementById(tabs_to_hide[i]).style.display = "none";
+    }
 }
 
 function updateProgress() {
@@ -68,14 +115,17 @@ function updateProgress() {
 window.onload = function() { 
 
     if((document.cookie.match(/=/g) || []).length > 0) {
-        document.getElementById("application").style.display = "block";
-        document.getElementById("about").style.display = "none";
+        document.getElementById("application").style.display = "none";
+        document.getElementById("series").style.display = "none";
+        document.getElementById("about").style.display = "block";
 
-        document.getElementById("about_button").setAttribute("class", closedClass());
-        document.getElementById("application_button").setAttribute("class", openedClass());
+        document.getElementById("about_button").setAttribute("class", openedClass());
+        document.getElementById("series_button").setAttribute("class", closedClass());
+        document.getElementById("application_button").setAttribute("class", closedClass());
     }
     else {
         document.getElementById("about_button").setAttribute("class", openedClass());
+        document.getElementById("series_button").setAttribute("class", closedClass());
         document.getElementById("application_button").setAttribute("class", closedClass());
     }
 
@@ -92,4 +142,5 @@ window.onload = function() {
     }
 
     next(); 
+    refreshSeriesTable();
 };
